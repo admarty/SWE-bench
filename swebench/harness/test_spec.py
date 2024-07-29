@@ -4,10 +4,13 @@ import platform
 import re
 
 from dataclasses import dataclass
-from typing import Any, Union
+from typing import Any, Union, cast
 
 from swebench.harness.constants import (
     SWEbenchInstance,
+    KEY_INSTANCE_ID,
+    FAIL_TO_PASS,
+    PASS_TO_PASS,
     MAP_REPO_TO_INSTALL,
     MAP_REPO_VERSION_TO_SPECS,
     USE_X86,
@@ -34,9 +37,9 @@ class TestSpec:
     instance_id: str
     repo: str
     version: str
-    repo_script_list: str
-    eval_script_list: str
-    env_script_list: str
+    repo_script_list: list[str]
+    eval_script_list: list[str]
+    env_script_list: list[str]
     arch: str
     FAIL_TO_PASS: list[str]
     PASS_TO_PASS: list[str]
@@ -101,15 +104,15 @@ class TestSpec:
             return "linux/arm64/v8"
         else:
             raise ValueError(f"Invalid architecture: {self.arch}")
-        
+
 
 def get_test_specs_from_dataset(dataset: Union[list[SWEbenchInstance], list[TestSpec]]) -> list[TestSpec]:
     """
     Idempotent function that converts a list of SWEbenchInstance objects to a list of TestSpec objects.
     """
     if isinstance(dataset[0], TestSpec):
-        return dataset
-    return list(map(make_test_spec, dataset))
+        return cast(list[TestSpec], dataset)
+    return list(map(make_test_spec, cast(list[SWEbenchInstance], dataset)))
 
 
 def make_repo_script_list(specs, repo, repo_directory, base_commit, env_name):
@@ -255,7 +258,7 @@ def make_eval_script_list(instance, specs, env_name, repo_directory, base_commit
 def make_test_spec(instance: SWEbenchInstance) -> TestSpec:
     if isinstance(instance, TestSpec):
         return instance
-    instance_id = instance["instance_id"]
+    instance_id = instance[KEY_INSTANCE_ID]
     repo = instance["repo"]
     version = instance["version"]
     base_commit = instance["base_commit"]
@@ -269,8 +272,8 @@ def make_test_spec(instance: SWEbenchInstance) -> TestSpec:
             return json.loads(instance[key])
         return instance[key]
 
-    pass_to_pass = _from_json_or_obj("PASS_TO_PASS")
-    fail_to_pass = _from_json_or_obj("FAIL_TO_PASS")
+    pass_to_pass = _from_json_or_obj(PASS_TO_PASS)
+    fail_to_pass = _from_json_or_obj(FAIL_TO_PASS)
 
     env_name = "testbed"
     repo_directory = f"/{env_name}"

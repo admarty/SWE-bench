@@ -41,5 +41,21 @@ setuptools.setup(
         'unidiff',
         'tqdm',
     ],
+    extras_require={
+        'inference': [
+            'tiktoken',
+            'openai',
+            'anthropic',
+            'transformers',
+            'peft',
+            'sentencepiece',
+            'protobuf',
+            'torch',
+            'flash_attn',
+            'triton',
+            'jedi',
+            'tenacity',
+        ],
+    },
     include_package_data=True,
 )

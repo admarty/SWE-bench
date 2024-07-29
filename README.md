@@ -89,7 +89,7 @@ python -m swebench.harness.run_evaluation \
     # use --run_id to name the evaluation run
 ```
 
-This command will generate docker build logs (`build_image_logs`) and evaluation logs (`run_instance_logs`) in the current directory.
+This command will generate docker build logs (`logs/build_images`) and evaluation logs (`logs/run_evaluation`) in the current directory.
 
 The final evaluation results will be stored in the `evaluation_results` directory.
 
@@ -99,9 +99,9 @@ python -m swebench.harness.run_evaluation --help
 ```
 
 Additionally, the SWE-Bench repo can help you:
-* Train your own models on our pre-processed datasets  
-* Run [inference](https://github.com/princeton-nlp/SWE-bench/blob/main/inference/) on existing models (either models you have on-disk like LLaMA, or models you have access to through an API like GPT-4). The inference step is where you get a repo and an issue and have the model try to generate a fix for it.
-*  Run SWE-bench's [data collection procedure](https://github.com/princeton-nlp/SWE-bench/blob/main/swebench/collect/) on your own repositories, to make new SWE-Bench tasks. 
+* Train your own models on our pre-processed datasets
+* Run [inference](https://github.com/princeton-nlp/SWE-bench/blob/main/swebench/inference/README.md) on existing models (either models you have on-disk like LLaMA, or models you have access to through an API like GPT-4). The inference step is where you get a repo and an issue and have the model try to generate a fix for it.
+*  Run SWE-bench's [data collection procedure](https://github.com/princeton-nlp/SWE-bench/blob/main/swebench/collect/) on your own repositories, to make new SWE-Bench tasks.
 
 ## ⬇️ Downloads
 | Datasets | Models |
@@ -116,14 +116,14 @@ Additionally, the SWE-Bench repo can help you:
 ## 🍎 Tutorials
 We've also written the following blog posts on how to use different parts of SWE-bench.
 If you'd like to see a post about a particular topic, please let us know via an issue.
-* [Nov 1. 2023] Collecting Evaluation Tasks for SWE-Bench ([🔗](https://github.com/princeton-nlp/SWE-bench/tree/main/swebench/collect/collection.md))
+* [Nov 1. 2023] Collecting Evaluation Tasks for SWE-Bench ([🔗](https://github.com/princeton-nlp/SWE-bench/tree/main/swebench/assets/collection.md))
 * [Nov 6. 2023] Evaluating on SWE-bench ([🔗](https://github.com/princeton-nlp/SWE-bench/tree/main/swebench/harness/evaluation.md))
 
 ## 💫 Contributions
 We would love to hear from the broader NLP, Machine Learning, and Software Engineering research communities, and we welcome any contributions, pull requests, or issues!
 To do so, please either file a new pull request or issue and fill in the corresponding templates accordingly. We'll be sure to follow up shortly!
 
-Contact person: [Carlos E. Jimenez](http://www.carlosejimenez.com/) and [John Yang](https://john-b-yang.github.io/) (Email: {carlosej, jy1682}@princeton.edu).
+Contact person: [Carlos E. Jimenez](http://www.carlosejimenez.com/) and [John Yang](https://john-b-yang.github.io/) (Email: carlosej@princeton.edu, johnby@stanford.edu).
 
 ## ✍️ Citation
 If you find our work helpful, please use the following citations.
