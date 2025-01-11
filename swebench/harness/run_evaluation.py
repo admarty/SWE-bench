@@ -594,7 +594,7 @@ if __name__ == "__main__":
     parser.add_argument("--run_id", type=str, required=True, help="Run ID - identifies the run")
 
     # Modal execution args
-    parser.add_argument("--modal", action="store_true", default=False, help="Run on Modal")
+    parser.add_argument("--modal", type=str2bool, default=False, help="Run on Modal")
 
     args = parser.parse_args()
     main(**vars(args))
